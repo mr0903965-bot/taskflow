@@ -46,7 +46,7 @@ export default function App() {
   const [editTask,    setEditTask]   = useState(null)
   const [filterP,     setFilterP]    = useState(null)
   const [filterT,     setFilterT]    = useState(null)
-  const [showDone,    setShowDone]   = useState(false)
+  const [showDone,    setShowDone]   = useState(true)
   const [sortBy,      setSortBy]     = useState('due')
   const [notifPerm,   setNotifPerm]  = useState(typeof Notification !== 'undefined' ? Notification.permission : 'default')
   const [showLangMenu,  setShowLangMenu]  = useState(false)
