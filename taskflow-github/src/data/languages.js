@@ -24,6 +24,10 @@ const LANGS = {
     weekDays: ['Lu','Ma','Mi','Ju','Vi','Sa','Do'],
     weekDaysFull: ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'],
     recurrence: 'RECURRENCIA', recNone: 'Ninguna', recDaily: 'Diaria', recWeekly: 'Semanal', recMonthly: 'Mensual', recNextCreated: '↻ Siguiente:',
+    helpTitle: 'Cómo usar', helpWhat: '¿Qué es TaskFlow?', helpHowTo: 'Primeros pasos', helpFeatures: 'Funciones principales',
+    helpDesc: 'TaskFlow es una app de tareas personal que funciona completamente en tu navegador. Sin cuentas, sin suscripciones — tus datos se guardan automáticamente.',
+    helpSteps: ['Escribe una tarea en la barra rápida y presiona Enter','Usa el formulario completo para agregar prioridad, fecha y etiquetas','Marca el checkbox para completar una tarea','Usa ✎ para editar y × para eliminar','Cambia entre Lista, Calendario y Estadísticas con las pestañas','Activa ↻ Recurrencia para tareas que se repiten'],
+    helpFeatList: ['6 idiomas','Modo oscuro','Calendario','Estadísticas','Recurrencia','Export / Import','Notificaciones','Guardado auto','Quick Add','Subtareas'],
   },
   en: {
     name: 'English', flag: '🇺🇸',
@@ -50,6 +54,10 @@ const LANGS = {
     weekDays: ['Mo','Tu','We','Th','Fr','Sa','Su'],
     weekDaysFull: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
     recurrence: 'RECURRENCE', recNone: 'None', recDaily: 'Daily', recWeekly: 'Weekly', recMonthly: 'Monthly', recNextCreated: '↻ Next:',
+    helpTitle: 'How to use', helpWhat: 'What is TaskFlow?', helpHowTo: 'Quick steps', helpFeatures: 'Key features',
+    helpDesc: 'TaskFlow is a personal task manager that runs entirely in your browser. No account needed — your data saves automatically.',
+    helpSteps: ['Type a task in the quick-add bar and press Enter','Use the full form to add priority, due date, and tags','Check the checkbox to complete a task','Use ✎ to edit and × to delete','Switch between List, Calendar, and Stats with the tabs','Enable ↻ Recurrence for repeating tasks'],
+    helpFeatList: ['6 languages','Dark mode','Calendar','Statistics','Recurrence','Export / Import','Notifications','Auto-save','Quick Add','Subtasks'],
   },
   fr: {
     name: 'Français', flag: '🇫🇷',
@@ -76,6 +84,10 @@ const LANGS = {
     weekDays: ['Lu','Ma','Me','Je','Ve','Sa','Di'],
     weekDaysFull: ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'],
     recurrence: 'RÉCURRENCE', recNone: 'Aucune', recDaily: 'Quotidienne', recWeekly: 'Hebdomadaire', recMonthly: 'Mensuelle', recNextCreated: '↻ Suivante:',
+    helpTitle: 'Comment utiliser', helpWhat: "Qu'est-ce que TaskFlow ?", helpHowTo: 'Premiers pas', helpFeatures: 'Fonctionnalités',
+    helpDesc: 'TaskFlow est un gestionnaire de tâches personnel qui fonctionne entièrement dans votre navigateur. Sans compte — vos données sont sauvegardées automatiquement.',
+    helpSteps: ['Tapez une tâche dans la barre rapide et appuyez sur Entrée','Utilisez le formulaire complet pour ajouter priorité, date et étiquettes','Cochez la case pour terminer une tâche','Utilisez ✎ pour modifier et × pour supprimer','Changez de vue avec les onglets Liste, Calendrier, Stats','Activez ↻ Récurrence pour les tâches répétitives'],
+    helpFeatList: ['6 langues','Mode sombre','Calendrier','Statistiques','Récurrence','Export / Import','Notifications','Sauvegarde auto','Ajout rapide','Sous-tâches'],
   },
   de: {
     name: 'Deutsch', flag: '🇩🇪',
@@ -102,6 +114,10 @@ const LANGS = {
     weekDays: ['Mo','Di','Mi','Do','Fr','Sa','So'],
     weekDaysFull: ['Mo','Di','Mi','Do','Fr','Sa','So'],
     recurrence: 'WIEDERHOLUNG', recNone: 'Keine', recDaily: 'Täglich', recWeekly: 'Wöchentlich', recMonthly: 'Monatlich', recNextCreated: '↻ Nächste:',
+    helpTitle: 'Wie benutzen', helpWhat: 'Was ist TaskFlow?', helpHowTo: 'Erste Schritte', helpFeatures: 'Funktionen',
+    helpDesc: 'TaskFlow ist ein persönlicher Aufgabenmanager, der vollständig im Browser läuft. Kein Konto erforderlich — Ihre Daten werden automatisch gespeichert.',
+    helpSteps: ['Aufgabe in die Schnelleingabe tippen und Enter drücken','Vollständiges Formular für Priorität, Datum und Etiketten nutzen','Checkbox ankreuzen, um eine Aufgabe abzuschließen','✎ zum Bearbeiten und × zum Löschen verwenden','Mit den Tabs zwischen Liste, Kalender und Statistik wechseln','↻ Wiederholung für wiederkehrende Aufgaben aktivieren'],
+    helpFeatList: ['6 Sprachen','Dunkelmodus','Kalender','Statistiken','Wiederholung','Export / Import','Benachrichtigungen','Auto-Speicherung','Schnelleingabe','Unteraufgaben'],
   },
   pt: {
     name: 'Português', flag: '🇧🇷',
@@ -128,6 +144,10 @@ const LANGS = {
     weekDays: ['Se','Te','Qu','Qu','Se','Sá','Do'],
     weekDaysFull: ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
     recurrence: 'RECORRÊNCIA', recNone: 'Nenhuma', recDaily: 'Diária', recWeekly: 'Semanal', recMonthly: 'Mensal', recNextCreated: '↻ Próxima:',
+    helpTitle: 'Como usar', helpWhat: 'O que é TaskFlow?', helpHowTo: 'Primeiros passos', helpFeatures: 'Funcionalidades',
+    helpDesc: 'TaskFlow é um gerenciador de tarefas pessoal que funciona totalmente no navegador. Sem conta — seus dados são salvos automaticamente.',
+    helpSteps: ['Digite uma tarefa na barra rápida e pressione Enter','Use o formulário completo para adicionar prioridade, data e etiquetas','Marque a caixa para concluir uma tarefa','Use ✎ para editar e × para excluir','Alterne entre Lista, Calendário e Estatísticas pelas abas','Ative ↻ Recorrência para tarefas que se repetem'],
+    helpFeatList: ['6 idiomas','Modo escuro','Calendário','Estatísticas','Recorrência','Export / Import','Notificações','Salvamento auto','Quick Add','Subtarefas'],
   },
   ja: {
     name: '日本語', flag: '🇯🇵',
@@ -154,6 +174,10 @@ const LANGS = {
     weekDays: ['月','火','水','木','金','土','日'],
     weekDaysFull: ['月','火','水','木','金','土','日'],
     recurrence: '繰り返し', recNone: 'なし', recDaily: '毎日', recWeekly: '毎週', recMonthly: '毎月', recNextCreated: '↻ 次回:',
+    helpTitle: '使い方', helpWhat: 'TaskFlowとは？', helpHowTo: 'クイックスタート', helpFeatures: '主な機能',
+    helpDesc: 'TaskFlowはブラウザ上で完全に動作する個人タスク管理アプリです。アカウント不要 — データは自動的に保存されます。',
+    helpSteps: ['クイック追加バーにタスクを入力してEnterを押す','詳細フォームで優先度・期限・タグを設定する','チェックボックスでタスクを完了する','✎で編集、×で削除する','タブでリスト・カレンダー・統計を切り替える','↻繰り返しで定期タスクを設定する'],
+    helpFeatList: ['6言語対応','ダークモード','カレンダー','統計','繰り返し','エクスポート/インポート','通知','自動保存','クイック追加','サブタスク'],
   },
 }
 

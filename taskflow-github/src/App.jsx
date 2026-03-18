@@ -12,6 +12,7 @@ import EditModal    from './components/EditModal'
 import CalendarView from './components/CalendarView'
 import StatsView    from './components/StatsView'
 import QuickAdd     from './components/QuickAdd'
+import HelpPanel    from './components/HelpPanel'
 
 export default function App() {
   // ── Preferences ────────────────────────────────────────────────────────────
@@ -51,6 +52,7 @@ export default function App() {
   const [notifPerm,   setNotifPerm]  = useState(typeof Notification !== 'undefined' ? Notification.permission : 'default')
   const [showLangMenu,  setShowLangMenu]  = useState(false)
   const [deletingIds,   setDeletingIds]   = useState(new Set())  // ids currently animating out
+  const [showHelp,      setShowHelp]      = useState(false)
 
   const { toasts, addToast, removeToast } = useToast()
   const t = LANGS[lang]
@@ -273,6 +275,20 @@ export default function App() {
               <button onClick={() => setSound((s) => !s)} style={{ width: 28, height: 28, borderRadius: 7, border: '1px solid rgba(255,255,255,0.1)', background: sound ? 'rgba(52,211,153,0.12)' : 'rgba(255,255,255,0.04)', cursor: 'pointer', fontSize: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{sound ? '🔊' : '🔇'}</button>
               <button onClick={requestNotif} style={{ width: 28, height: 28, borderRadius: 7, border: '1px solid', borderColor: notifPerm === 'granted' ? '#34D399' : 'rgba(255,255,255,0.1)', background: notifPerm === 'granted' ? 'rgba(52,211,153,0.12)' : 'rgba(255,255,255,0.04)', cursor: 'pointer', fontSize: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🔔</button>
               <button onClick={() => setDark((d) => !d)} style={{ width: 28, height: 28, borderRadius: 7, border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.04)', cursor: 'pointer', fontSize: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{dark ? '☀️' : '🌙'}</button>
+              <button
+                onClick={() => setShowHelp((s) => !s)}
+                title={t.helpTitle}
+                style={{
+                  width: 28, height: 28, borderRadius: 7,
+                  border: `1px solid ${showHelp ? 'rgba(99,102,241,0.6)' : 'rgba(255,255,255,0.1)'}`,
+                  background: showHelp ? 'rgba(99,102,241,0.2)' : 'rgba(255,255,255,0.04)',
+                  cursor: 'pointer', fontSize: 11,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontFamily: "'Space Mono', monospace", fontWeight: 700,
+                  color: showHelp ? '#A5B4FC' : 'rgba(255,255,255,0.6)',
+                  transition: 'all 0.2s',
+                }}
+              >?</button>
 
               {urgentCount > 0 && (
                 <div style={{ background: '#EF4444', color: '#fff', borderRadius: 7, padding: '2px 9px', textAlign: 'center' }}>
@@ -414,6 +430,10 @@ export default function App() {
           TAGS={TAGS}
           dark={dark}
         />
+      )}
+
+      {showHelp && (
+        <HelpPanel t={t} dark={dark} onClose={() => setShowHelp(false)} />
       )}
 
       <Toast toasts={toasts} remove={removeToast} />
