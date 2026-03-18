@@ -1,10 +1,13 @@
 import { useState } from 'react'
-import { getDaysLeft } from '../utils/helpers'
-import { playSound } from '../utils/helpers'
+import { getDaysLeft, playSound } from '../utils/helpers'
+
+const RECURRENCE_OPTIONS = ['none', 'daily', 'weekly', 'monthly']
 
 export default function TaskForm({ t, PRIORITIES, TAGS, dark, onAdd, onCancel }) {
-  const [form, setForm]     = useState({ text: '', priority: t.priLabels[2], tags: [], due: '' })
-  const [newSub, setNewSub] = useState('')
+  const [form, setForm] = useState({
+    text: '', priority: t.priLabels[2], tags: [], due: '', recurrence: null,
+  })
+  const [newSub,   setNewSub]   = useState('')
   const [formSubs, setFormSubs] = useState([])
 
   const surf  = dark ? '#1A1A1E' : '#FFFFFF'
@@ -29,7 +32,7 @@ export default function TaskForm({ t, PRIORITIES, TAGS, dark, onAdd, onCancel })
   }
 
   const handleCancel = () => {
-    setForm({ text: '', priority: t.priLabels[2], tags: [], due: '' })
+    setForm({ text: '', priority: t.priLabels[2], tags: [], due: '', recurrence: null })
     setFormSubs([])
     setNewSub('')
     onCancel()
@@ -44,12 +47,15 @@ export default function TaskForm({ t, PRIORITIES, TAGS, dark, onAdd, onCancel })
     else                 dueHint = `${t.expiresIn} ${days} ${t.days}`
   }
 
+  // Map recurrence value → display label
+  const recLabel = { none: t.recNone, daily: t.recDaily, weekly: t.recWeekly, monthly: t.recMonthly }
+  const currentRec = form.recurrence || 'none'
+
   return (
     <div style={{ background: surf, border: `1.5px solid ${bord}`, borderRadius: 12, padding: '15px', boxShadow: dark ? '0 4px 24px rgba(0,0,0,0.35)' : '0 4px 20px rgba(0,0,0,0.05)', animation: 'fadeIn 0.2s ease' }}>
-      {/* Text input */}
-      <input
-        autoFocus
-        value={form.text}
+
+      {/* Text */}
+      <input autoFocus value={form.text}
         onChange={(e) => setForm((f) => ({ ...f, text: e.target.value }))}
         onKeyDown={(e) => e.key === 'Enter' && handleAdd()}
         placeholder={t.whatTodo}
@@ -64,8 +70,8 @@ export default function TaskForm({ t, PRIORITIES, TAGS, dark, onAdd, onCancel })
             <button key={p.label} onClick={() => setForm((f) => ({ ...f, priority: p.label }))} style={{
               padding: '3px 10px', borderRadius: 5, border: '1.5px solid',
               borderColor: form.priority === p.label ? p.color : bord,
-              background: form.priority === p.label ? p.bg : 'transparent',
-              color: form.priority === p.label ? p.color : muted,
+              background:  form.priority === p.label ? p.bg   : 'transparent',
+              color:       form.priority === p.label ? p.color : muted,
               fontSize: 8, fontWeight: 700, fontFamily: "'Space Mono', monospace", cursor: 'pointer',
             }}>{p.label.toUpperCase()}</button>
           ))}
@@ -82,6 +88,29 @@ export default function TaskForm({ t, PRIORITIES, TAGS, dark, onAdd, onCancel })
         </div>
       </div>
 
+      {/* Recurrence */}
+      <div style={{ marginBottom: 10 }}>
+        <div style={{ fontSize: 7, letterSpacing: '0.12em', color: muted, marginBottom: 5, fontFamily: "'Space Mono', monospace" }}>{t.recurrence}</div>
+        <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+          {RECURRENCE_OPTIONS.map((opt) => {
+            const isActive = currentRec === opt
+            return (
+              <button key={opt} onClick={() => setForm((f) => ({ ...f, recurrence: opt === 'none' ? null : opt }))} style={{
+                padding: '3px 10px', borderRadius: 5, border: '1.5px solid',
+                borderColor: isActive ? '#6366F1' : bord,
+                background:  isActive ? 'rgba(99,102,241,0.12)' : 'transparent',
+                color:       isActive ? '#6366F1' : muted,
+                fontSize: 8, fontWeight: 700, fontFamily: "'Space Mono', monospace", cursor: 'pointer',
+                display: 'flex', alignItems: 'center', gap: 3,
+              }}>
+                {opt !== 'none' && <span style={{ fontSize: 9 }}>↻</span>}
+                {recLabel[opt].toUpperCase()}
+              </button>
+            )
+          })}
+        </div>
+      </div>
+
       {/* Tags */}
       <div style={{ marginBottom: 10 }}>
         <div style={{ fontSize: 7, letterSpacing: '0.12em', color: muted, marginBottom: 5, fontFamily: "'Space Mono', monospace" }}>{t.tags}</div>
@@ -90,8 +119,8 @@ export default function TaskForm({ t, PRIORITIES, TAGS, dark, onAdd, onCancel })
             <button key={tag.label} onClick={() => toggleTag(tag.label)} style={{
               padding: '2px 7px', borderRadius: 99, cursor: 'pointer', border: '1px solid',
               borderColor: form.tags.includes(tag.label) ? tag.color : bord,
-              background: form.tags.includes(tag.label) ? `${tag.color}18` : 'transparent',
-              color: form.tags.includes(tag.label) ? tag.color : muted, fontSize: 8,
+              background:  form.tags.includes(tag.label) ? `${tag.color}18` : 'transparent',
+              color:       form.tags.includes(tag.label) ? tag.color : muted, fontSize: 8,
             }}>#{tag.label}</button>
           ))}
         </div>
@@ -108,7 +137,8 @@ export default function TaskForm({ t, PRIORITIES, TAGS, dark, onAdd, onCancel })
           </div>
         ))}
         <div style={{ display: 'flex', gap: 4, marginTop: 4 }}>
-          <input value={newSub} onChange={(e) => setNewSub(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addFormSub())}
+          <input value={newSub} onChange={(e) => setNewSub(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addFormSub())}
             placeholder={t.addSubtask}
             style={{ flex: 1, padding: '4px 7px', border: `1px solid ${bord}`, borderRadius: 5, fontSize: 10, fontFamily: "'Lato', sans-serif", background: 'transparent', color: textC, outline: 'none' }} />
           <button onClick={addFormSub} style={{ padding: '4px 9px', borderRadius: 5, border: `1px solid ${bord}`, background: 'transparent', color: muted, cursor: 'pointer', fontSize: 13 }}>+</button>

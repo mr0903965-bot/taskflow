@@ -57,14 +57,15 @@ export function validateTask(raw, defaultPriority = 'Media') {
     done: raw.done,
 
     // Optional fields — kept if valid, otherwise default
-    priority:  typeof raw.priority === 'string' && raw.priority ? raw.priority : defaultPriority,
-    tags:      Array.isArray(raw.tags) ? raw.tags.filter((t) => typeof t === 'string') : [],
-    due:       typeof raw.due === 'string' ? raw.due : '',
-    subtasks:  Array.isArray(raw.subtasks)
+    priority:   typeof raw.priority === 'string' && raw.priority ? raw.priority : defaultPriority,
+    tags:       Array.isArray(raw.tags) ? raw.tags.filter((t) => typeof t === 'string') : [],
+    due:        typeof raw.due === 'string' ? raw.due : '',
+    subtasks:   Array.isArray(raw.subtasks)
       ? raw.subtasks
           .filter((s) => s && typeof s.text === 'string' && typeof s.done === 'boolean')
           .map((s) => ({ id: s.id ?? Date.now() + Math.random(), text: s.text.trim(), done: s.done }))
       : [],
+    recurrence: ['daily', 'weekly', 'monthly'].includes(raw.recurrence) ? raw.recurrence : null,
 
     // id is intentionally omitted — caller assigns a fresh id
   }

@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import LANGS from './data/languages'
 import { PRI_COLORS, TAG_COLORS, TODAY } from './data/constants'
-import { ls, lsSave, getDaysLeft, getLocale } from './utils/helpers'
+import { ls, lsSave, getDaysLeft, getLocale, getNextDueDate } from './utils/helpers'
 import { exportTasks, readTaskFile, mergeImport, replaceImport } from './utils/exportImport'
 import { useToast } from './hooks/useToast'
 import Toast        from './components/Toast'
@@ -104,12 +104,34 @@ export default function App() {
 
   const handleToggle = (id) => {
     setTasks((prev) => {
-      const task   = prev.find((x) => x.id === id)
+      const task    = prev.find((x) => x.id === id)
       if (!task) return prev
       const nowDone = !task.done
-      const next   = prev.map((x) => (x.id === id ? { ...x, done: nowDone } : x))
+
+      // Mark the task done/undone
+      let next = prev.map((x) => (x.id === id ? { ...x, done: nowDone } : x))
+
+      // Spawn next occurrence when a recurring task is completed
+      if (nowDone && task.recurrence) {
+        const nextDue = getNextDueDate(task.due, task.recurrence)
+        const spawned = {
+          id:         nextId,
+          text:       task.text,
+          priority:   task.priority,
+          tags:       [...task.tags],
+          due:        nextDue,
+          done:       false,
+          subtasks:   [],              // subtasks reset for each occurrence
+          recurrence: task.recurrence,
+        }
+        next = [...next, spawned]
+        setNextId((n) => n + 1)
+        addToast(`${t.recNextCreated} ${nextDue}`, 'info')
+      } else if (nowDone) {
+        addToast(`✓ "${task.text}" ${t.taskDone}`)
+      }
+
       syncTasks(next)
-      if (nowDone) addToast(`✓ "${task.text}" ${t.taskDone}`)
       return next
     })
   }

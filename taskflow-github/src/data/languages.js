@@ -23,6 +23,7 @@ const LANGS = {
     months: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
     weekDays: ['Lu','Ma','Mi','Ju','Vi','Sa','Do'],
     weekDaysFull: ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'],
+    recurrence: 'RECURRENCIA', recNone: 'Ninguna', recDaily: 'Diaria', recWeekly: 'Semanal', recMonthly: 'Mensual', recNextCreated: '↻ Siguiente:',
   },
   en: {
     name: 'English', flag: '🇺🇸',
@@ -48,6 +49,7 @@ const LANGS = {
     months: ['January','February','March','April','May','June','July','August','September','October','November','December'],
     weekDays: ['Mo','Tu','We','Th','Fr','Sa','Su'],
     weekDaysFull: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+    recurrence: 'RECURRENCE', recNone: 'None', recDaily: 'Daily', recWeekly: 'Weekly', recMonthly: 'Monthly', recNextCreated: '↻ Next:',
   },
   fr: {
     name: 'Français', flag: '🇫🇷',
@@ -73,6 +75,7 @@ const LANGS = {
     months: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
     weekDays: ['Lu','Ma','Me','Je','Ve','Sa','Di'],
     weekDaysFull: ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'],
+    recurrence: 'RÉCURRENCE', recNone: 'Aucune', recDaily: 'Quotidienne', recWeekly: 'Hebdomadaire', recMonthly: 'Mensuelle', recNextCreated: '↻ Suivante:',
   },
   de: {
     name: 'Deutsch', flag: '🇩🇪',
@@ -98,6 +101,7 @@ const LANGS = {
     months: ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
     weekDays: ['Mo','Di','Mi','Do','Fr','Sa','So'],
     weekDaysFull: ['Mo','Di','Mi','Do','Fr','Sa','So'],
+    recurrence: 'WIEDERHOLUNG', recNone: 'Keine', recDaily: 'Täglich', recWeekly: 'Wöchentlich', recMonthly: 'Monatlich', recNextCreated: '↻ Nächste:',
   },
   pt: {
     name: 'Português', flag: '🇧🇷',
@@ -123,6 +127,7 @@ const LANGS = {
     months: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
     weekDays: ['Se','Te','Qu','Qu','Se','Sá','Do'],
     weekDaysFull: ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+    recurrence: 'RECORRÊNCIA', recNone: 'Nenhuma', recDaily: 'Diária', recWeekly: 'Semanal', recMonthly: 'Mensal', recNextCreated: '↻ Próxima:',
   },
   ja: {
     name: '日本語', flag: '🇯🇵',
@@ -148,6 +153,7 @@ const LANGS = {
     months: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
     weekDays: ['月','火','水','木','金','土','日'],
     weekDaysFull: ['月','火','水','木','金','土','日'],
+    recurrence: '繰り返し', recNone: 'なし', recDaily: '毎日', recWeekly: '毎週', recMonthly: '毎月', recNextCreated: '↻ 次回:',
   },
 }
 

@@ -51,3 +51,29 @@ export function getLocale(lang) {
   const map = { es: 'es-MX', en: 'en-US', fr: 'fr-FR', de: 'de-DE', pt: 'pt-BR', ja: 'ja-JP' }
   return map[lang] || 'es-MX'
 }
+
+/**
+ * Given a due date string (YYYY-MM-DD) and a recurrence type,
+ * returns the next due date string.
+ * If due is empty/null, uses today as the base.
+ *
+ * @param {string|null} due        - Current due date e.g. "2026-03-18"
+ * @param {string}      recurrence - "daily" | "weekly" | "monthly"
+ * @returns {string}               - Next due date as "YYYY-MM-DD"
+ */
+export function getNextDueDate(due, recurrence) {
+  const base = due ? new Date(due + 'T00:00:00') : new Date()
+
+  if (recurrence === 'daily') {
+    base.setDate(base.getDate() + 1)
+  } else if (recurrence === 'weekly') {
+    base.setDate(base.getDate() + 7)
+  } else if (recurrence === 'monthly') {
+    base.setMonth(base.getMonth() + 1)
+  }
+
+  const y = base.getFullYear()
+  const m = String(base.getMonth() + 1).padStart(2, '0')
+  const d = String(base.getDate()).padStart(2, '0')
+  return `${y}-${m}-${d}`
+}

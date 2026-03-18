@@ -1,11 +1,14 @@
 import { useState } from 'react'
 
+const RECURRENCE_OPTIONS = ['none', 'daily', 'weekly', 'monthly']
+
 export default function EditModal({ task, onSave, onClose, t, PRIORITIES, TAGS, dark }) {
   const [form, setForm] = useState({
-    text: task.text,
-    priority: task.priority,
-    tags: [...task.tags],
-    due: task.due || '',
+    text:       task.text,
+    priority:   task.priority,
+    tags:       [...task.tags],
+    due:        task.due || '',
+    recurrence: task.recurrence || null,   // preserve existing recurrence
   })
   const [newSub, setNewSub] = useState('')
   const [subtasks, setSubtasks] = useState(task.subtasks || [])
@@ -69,6 +72,30 @@ export default function EditModal({ task, onSave, onClose, t, PRIORITIES, TAGS, 
           <div style={{ fontSize: 8, letterSpacing: '0.12em', color: muted, marginBottom: 7, fontFamily: "'Space Mono', monospace" }}>{t.dueDate}</div>
           <input type="date" value={form.due} onChange={(e) => setForm((f) => ({ ...f, due: e.target.value }))}
             style={{ padding: '5px 9px', border: `1px solid ${bord}`, borderRadius: 6, fontSize: 10, fontFamily: "'Space Mono', monospace", color: textC, outline: 'none', background: surf, colorScheme: dark ? 'dark' : 'light' }} />
+        </div>
+
+        {/* Recurrence */}
+        <div style={{ marginBottom: 12 }}>
+          <div style={{ fontSize: 8, letterSpacing: '0.12em', color: muted, marginBottom: 7, fontFamily: "'Space Mono', monospace" }}>{t.recurrence}</div>
+          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+            {RECURRENCE_OPTIONS.map((opt) => {
+              const isActive = (form.recurrence || 'none') === opt
+              const recLabel = { none: t.recNone, daily: t.recDaily, weekly: t.recWeekly, monthly: t.recMonthly }
+              return (
+                <button key={opt} onClick={() => setForm((f) => ({ ...f, recurrence: opt === 'none' ? null : opt }))} style={{
+                  padding: '4px 11px', borderRadius: 5, border: '1.5px solid',
+                  borderColor: isActive ? '#6366F1' : bord,
+                  background:  isActive ? 'rgba(99,102,241,0.12)' : 'transparent',
+                  color:       isActive ? '#6366F1' : muted,
+                  fontSize: 9, fontWeight: 700, fontFamily: "'Space Mono', monospace", cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', gap: 3,
+                }}>
+                  {opt !== 'none' && <span style={{ fontSize: 10 }}>↻</span>}
+                  {recLabel[opt].toUpperCase()}
+                </button>
+              )
+            })}
+          </div>
         </div>
 
         {/* Tags */}

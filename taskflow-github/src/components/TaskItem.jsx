@@ -121,6 +121,20 @@ export default function TaskItem({
               {task.priority.toUpperCase()}
             </span>
             <DueBadge due={task.due} done={task.done} t={t} />
+            {task.recurrence && (
+              <span style={{
+                display: 'inline-flex', alignItems: 'center', gap: 2,
+                padding: '2px 6px', borderRadius: 5,
+                background: task.done ? 'rgba(100,116,139,0.08)' : 'rgba(99,102,241,0.10)',
+                color: task.done ? muted : '#6366F1',
+                fontSize: 9, fontWeight: 700,
+                fontFamily: "'Space Mono', monospace",
+                border: `1px solid ${task.done ? 'transparent' : 'rgba(99,102,241,0.25)'}`,
+                transition: 'color 300ms ease, background 300ms ease',
+              }}>
+                ↻
+              </span>
+            )}
             {task.tags.map((tag) => {
               const tc = TAGS.find((x) => x.label === tag)
               return (
