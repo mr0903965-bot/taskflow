@@ -10,6 +10,7 @@ import TaskForm     from './components/TaskForm'
 import EditModal    from './components/EditModal'
 import CalendarView from './components/CalendarView'
 import StatsView    from './components/StatsView'
+import QuickAdd     from './components/QuickAdd'
 
 export default function App() {
   // ── Preferences ────────────────────────────────────────────────────────────
@@ -267,6 +268,14 @@ export default function App() {
                 </button>
               ))}
             </div>
+
+            {/* ── Quick Add bar ── */}
+            <QuickAdd
+              t={t}
+              dark={dark}
+              defaultPriority={t.priLabels[2]}
+              onAdd={handleAdd}
+            />
 
             {/* Task list */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
