@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from 'react'
 import LANGS from './data/languages'
 import { PRI_COLORS, TAG_COLORS, TODAY } from './data/constants'
 import { ls, lsSave, getDaysLeft, getLocale } from './utils/helpers'
+import { exportTasks, readTaskFile, mergeImport, replaceImport } from './utils/exportImport'
 import { useToast } from './hooks/useToast'
 import Toast        from './components/Toast'
 import DueBadge     from './components/DueBadge'
@@ -128,6 +129,57 @@ export default function App() {
     if (task) addToast(`${t.taskDeleted}: "${task.text}"`)
   }
 
+  // ── Export ────────────────────────────────────────────────────────────────
+  const handleExport = () => {
+    exportTasks(tasks)
+    addToast('Export JSON ↓')
+  }
+
+  // ── Import ────────────────────────────────────────────────────────────────
+  const handleImport = async (e) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    // Reset input so the same file can be picked again if needed
+    e.target.value = ''
+
+    try {
+      const raw = await readTaskFile(file)
+      const defaultPriority = t.priLabels[2]   // "Media" / "Medium" etc.
+
+      const confirmed = window.confirm(
+        `Import ${raw.length} task(s)?\n\nOK = Merge with existing tasks\nCancel = Replace all tasks`
+      )
+
+      if (confirmed) {
+        // Merge
+        const { merged, nextId: newNextId, valid, skipped } = mergeImport(tasks, raw, nextId, defaultPriority)
+        setTasks(merged)
+        setNextId(newNextId)
+        syncTasks(merged)
+        const msg = skipped > 0 ? `Imported ${valid} tasks (${skipped} skipped)` : `Imported ${valid} tasks`
+        addToast(msg)
+      } else {
+        // Replace — but only if user explicitly presses Cancel (meaning Replace)
+        const doReplace = window.confirm(`Replace ALL current tasks with the ${raw.length} imported task(s)?`)
+        if (!doReplace) return
+        const { replaced, nextId: newNextId, valid, skipped } = replaceImport(raw, defaultPriority)
+        setTasks(replaced)
+        setNextId(newNextId)
+        syncTasks(replaced)
+        const msg = skipped > 0 ? `Replaced with ${valid} tasks (${skipped} skipped)` : `Replaced with ${valid} tasks`
+        addToast(msg)
+      }
+    } catch (err) {
+      const messages = {
+        NOT_JSON:    'Error: file must be a .json file',
+        NOT_ARRAY:   'Error: invalid format — expected a JSON array',
+        PARSE_ERROR: 'Error: could not parse JSON file',
+        READ_ERROR:  'Error: could not read file',
+      }
+      addToast(messages[err] || 'Import failed', 'error')
+    }
+  }
+
   // ── Filtered & sorted tasks ─────────────────────────────────────────────────
   const getPriNum = (p) => PRIORITIES.find((x) => x.label === p)?.num ?? 0
   const visible = useMemo(() => {
@@ -238,7 +290,7 @@ export default function App() {
 
         {/* Views */}
         {view === 'calendar' && <CalendarView tasks={tasks} t={t} dark={dark} />}
-        {view === 'stats'    && <StatsView tasks={tasks} t={t} dark={dark} PRIORITIES={PRIORITIES} TAGS={TAGS} />}
+        {view === 'stats'    && <StatsView tasks={tasks} t={t} dark={dark} PRIORITIES={PRIORITIES} TAGS={TAGS} onExport={handleExport} onImport={handleImport} />}
 
         {view === 'list' && (
           <>

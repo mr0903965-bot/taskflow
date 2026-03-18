@@ -1,6 +1,9 @@
+import { useRef } from 'react'
 import { TODAY } from '../data/constants'
+import { exportTasks, readTaskFile, mergeImport, replaceImport } from '../utils/exportImport'
 
-export default function StatsView({ tasks, t, dark, PRIORITIES, TAGS }) {
+export default function StatsView({ tasks, t, dark, PRIORITIES, TAGS, onExport, onImport }) {
+  const fileInputRef = useRef(null)
   const textC = dark ? '#F0F0F0' : '#1C1C1E'
   const muted = dark ? 'rgba(255,255,255,0.35)' : '#9CA3AF'
   const surf  = dark ? '#1C1C1E' : '#fff'
@@ -128,6 +131,70 @@ export default function StatsView({ tasks, t, dark, PRIORITIES, TAGS }) {
           </div>
         </div>
       )}
+
+      {/* ── Data: Export / Import ── */}
+      <div style={{ background: surf, border: `1px solid ${bord}`, borderRadius: 11, padding: '16px', marginTop: 4 }}>
+        <div style={{ fontSize: 8, letterSpacing: '0.1em', color: muted, marginBottom: 12, fontFamily: "'Space Mono', monospace" }}>
+          DATA
+        </div>
+
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          {/* Export button */}
+          <button
+            onClick={onExport}
+            style={{
+              flex: 1, minWidth: 120,
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+              padding: '9px 14px', borderRadius: 8, cursor: 'pointer',
+              border: `1.5px solid ${bord}`,
+              background: 'transparent',
+              color: textC,
+              fontSize: 11, fontWeight: 700, fontFamily: "'Space Mono', monospace",
+              letterSpacing: '0.04em',
+              transition: 'all 0.2s',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#34D399'; e.currentTarget.style.color = '#34D399' }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = bord;      e.currentTarget.style.color = textC }}
+          >
+            <span style={{ fontSize: 14 }}>↓</span> EXPORT JSON
+          </button>
+
+          {/* Import button */}
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            style={{
+              flex: 1, minWidth: 120,
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+              padding: '9px 14px', borderRadius: 8, cursor: 'pointer',
+              border: `1.5px solid ${bord}`,
+              background: 'transparent',
+              color: textC,
+              fontSize: 11, fontWeight: 700, fontFamily: "'Space Mono', monospace",
+              letterSpacing: '0.04em',
+              transition: 'all 0.2s',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#6366F1'; e.currentTarget.style.color = '#6366F1' }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = bord;      e.currentTarget.style.color = textC }}
+          >
+            <span style={{ fontSize: 14 }}>↑</span> IMPORT JSON
+          </button>
+        </div>
+
+        {/* Caption */}
+        <div style={{ marginTop: 10, fontSize: 9, color: muted, lineHeight: 1.5 }}>
+          Export saves all tasks to a <code style={{ fontFamily: "'Space Mono', monospace", fontSize: 9 }}>.json</code> file.
+          Import merges tasks from a previously exported file.
+        </div>
+
+        {/* Hidden file input */}
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept=".json,application/json"
+          style={{ display: 'none' }}
+          onChange={onImport}
+        />
+      </div>
     </div>
   )
 }
