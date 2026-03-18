@@ -21,30 +21,18 @@ button {
   font-family: inherit;
 }
 
-button:focus {
-  outline: none;
-}
-
-input:focus {
-  outline: none;
-}
+button:focus { outline: none; }
+input:focus  { outline: none; }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0.4;
 }
 
-::-webkit-scrollbar {
-  width: 3px;
-}
+::-webkit-scrollbar        { width: 3px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: rgba(128,128,128,0.2); border-radius: 99px; }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(128, 128, 128, 0.2);
-  border-radius: 99px;
-}
+/* ── Utility animations ──────────────────────────────────────────────────── */
 
 @keyframes slideIn {
   from { opacity: 0; transform: translateX(18px); }
@@ -63,4 +51,80 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @keyframes pulse {
   0%, 100% { opacity: 0.3; transform: scale(0.8); }
   50%       { opacity: 1;   transform: scale(1.2); }
+}
+
+/* ── Task enter ──────────────────────────────────────────────────────────── */
+/*
+ * Applied unconditionally on mount — plays exactly once at creation.
+ * Uses translateY + scale so it feels like the card "drops in" gently.
+ */
+@keyframes taskEnter {
+  from { opacity: 0; transform: translateY(-10px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)     scale(1);    }
+}
+
+.task-enter {
+  animation: taskEnter 220ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* ── Task exit ───────────────────────────────────────────────────────────── */
+/*
+ * Applied when user clicks ×.
+ * max-height collapse closes the gap without layout thrash.
+ * DOM removal fires after 250ms (App.jsx setTimeout).
+ */
+@keyframes taskExit {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    max-height: 300px;
+    margin-bottom: 5px;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+    max-height: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.task-exit {
+  animation: taskExit 250ms cubic-bezier(0.4, 0, 0.6, 1) both;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* ── Task completion transitions ─────────────────────────────────────────── */
+
+.task-content-text {
+  transition: color 300ms ease, opacity 300ms ease;
+}
+
+.task-priority-stripe {
+  transition: background 350ms ease;
+}
+
+.task-checkbox {
+  transition:
+    background   200ms ease,
+    border-color 200ms ease,
+    transform    150ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.task-checkbox:active {
+  transform: scale(0.82) !important;
+}
+
+/* ── Respect prefers-reduced-motion ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .task-enter,
+  .task-exit,
+  .task-content-text,
+  .task-priority-stripe,
+  .task-checkbox {
+    animation: none !important;
+    transition: none !important;
+  }
 }

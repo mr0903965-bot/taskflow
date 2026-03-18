@@ -49,7 +49,8 @@ export default function App() {
   const [showDone,    setShowDone]   = useState(false)
   const [sortBy,      setSortBy]     = useState('due')
   const [notifPerm,   setNotifPerm]  = useState(typeof Notification !== 'undefined' ? Notification.permission : 'default')
-  const [showLangMenu, setShowLangMenu] = useState(false)
+  const [showLangMenu,  setShowLangMenu]  = useState(false)
+  const [deletingIds,   setDeletingIds]   = useState(new Set())  // ids currently animating out
 
   const { toasts, addToast, removeToast } = useToast()
   const t = LANGS[lang]
@@ -124,9 +125,16 @@ export default function App() {
   }
 
   const handleRemove = (id) => {
-    const task = tasks.find((x) => x.id === id)
-    updateTasks((prev) => prev.filter((x) => x.id !== id))
-    if (task) addToast(`${t.taskDeleted}: "${task.text}"`)
+    // Phase 1: mark as deleting — TaskItem plays taskExit animation
+    setDeletingIds((prev) => new Set(prev).add(id))
+
+    // Phase 2: after animation (250ms), remove from state and clear the id
+    setTimeout(() => {
+      const task = tasks.find((x) => x.id === id)
+      updateTasks((prev) => prev.filter((x) => x.id !== id))
+      setDeletingIds((prev) => { const s = new Set(prev); s.delete(id); return s })
+      if (task) addToast(`${t.taskDeleted}: "${task.text}"`)
+    }, 250)
   }
 
   // ── Export ────────────────────────────────────────────────────────────────
@@ -345,6 +353,7 @@ export default function App() {
                   TAGS={TAGS}
                   dark={dark}
                   t={t}
+                  isDeleting={deletingIds.has(task.id)}
                   onToggle={handleToggle}
                   onToggleSubtask={handleToggleSub}
                   onEdit={setEditTask}
