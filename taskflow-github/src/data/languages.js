@@ -25,8 +25,8 @@ const LANGS = {
     weekDaysFull: ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'],
     recurrence: 'RECURRENCIA', recNone: 'Ninguna', recDaily: 'Diaria', recWeekly: 'Semanal', recMonthly: 'Mensual', recNextCreated: '↻ Siguiente:',
     helpTitle: 'Cómo usar', helpWhat: '¿Qué es TaskFlow?', helpHowTo: 'Primeros pasos', helpFeatures: 'Funciones principales',
-    helpDesc: 'TaskFlow es una app de tareas personal que funciona completamente en tu navegador. Sin cuentas, sin suscripciones — tus datos se guardan automáticamente.',
-    helpSteps: ['Escribe una tarea en la barra rápida y presiona Enter','Usa el formulario completo para agregar prioridad, fecha y etiquetas','Marca el checkbox para completar una tarea','Usa ✎ para editar y × para eliminar','Cambia entre Lista, Calendario y Estadísticas con las pestañas','Activa ↻ Recurrencia para tareas que se repiten'],
+    helpDesc: 'TaskFlow es una app de tareas personal que funciona completamente en tu navegador. Sin cuentas, sin suscripciones — tus datos se guardan automáticamente. Sin ruido, sin distracciones: solo tú y lo que importa.',
+    helpSteps: ['Escribe una tarea en la barra rápida y presiona Enter','Usa el formulario completo para agregar prioridad, fecha y etiquetas','Marca el checkbox para completar una tarea','Usa ✎ para editar y × para eliminar','Cambia entre Lista, Calendario y Estadísticas con las pestañas','Activa ↻ Recurrencia para tareas que se repiten','Consejo: usa tareas recurrentes para construir hábitos — ejercicio diario, lectura semanal, revisión mensual de metas.'],
     helpFeatList: ['6 idiomas','Modo oscuro','Calendario','Estadísticas','Recurrencia','Export / Import','Notificaciones','Guardado auto','Quick Add','Subtareas'],
   },
   en: {
