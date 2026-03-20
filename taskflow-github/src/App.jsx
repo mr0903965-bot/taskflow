@@ -13,6 +13,7 @@ import CalendarView from './components/CalendarView'
 import StatsView    from './components/StatsView'
 import QuickAdd     from './components/QuickAdd'
 import HelpPanel    from './components/HelpPanel'
+import AppFooter    from './components/AppFooter'
 
 export default function App() {
   // ── Preferences ────────────────────────────────────────────────────────────
@@ -239,7 +240,7 @@ export default function App() {
   // ── Render ──────────────────────────────────────────────────────────────────
   return (
     <div
-      style={{ minHeight: '100vh', background: bg, color: textC, transition: 'background 0.3s' }}
+      style={{ minHeight: '100vh', background: bg, color: textC, transition: 'background 0.3s', display: 'flex', flexDirection: 'column' }}
       onClick={() => showLangMenu && setShowLangMenu(false)}
     >
       {/* ── HEADER ── */}
@@ -435,6 +436,8 @@ export default function App() {
       {showHelp && (
         <HelpPanel t={t} dark={dark} onClose={() => setShowHelp(false)} />
       )}
+
+      <AppFooter dark={dark} />
 
       <Toast toasts={toasts} remove={removeToast} />
     </div>

@@ -28,6 +28,7 @@ const LANGS = {
     helpDesc: 'TaskFlow es una app de tareas personal que funciona completamente en tu navegador. Sin cuentas, sin suscripciones — tus datos se guardan automáticamente. Sin ruido, sin distracciones: solo tú y lo que importa.',
     helpSteps: ['Escribe una tarea en la barra rápida y presiona Enter','Usa el formulario completo para agregar prioridad, fecha y etiquetas','Marca el checkbox para completar una tarea','Usa ✎ para editar y × para eliminar','Cambia entre Lista, Calendario y Estadísticas con las pestañas','Activa ↻ Recurrencia para tareas que se repiten','Consejo: usa tareas recurrentes para construir hábitos — ejercicio diario, lectura semanal, revisión mensual de metas.'],
     helpFeatList: ['6 idiomas','Modo oscuro','Calendario','Estadísticas','Recurrencia','Export / Import','Notificaciones','Guardado auto','Quick Add','Subtareas'],
+    supportMsg: 'Si TaskFlow te es útil, considera apoyar su desarrollo.', supportBtn: 'Apoyar TaskFlow',
   },
   en: {
     name: 'English', flag: '🇺🇸',
@@ -58,6 +59,7 @@ const LANGS = {
     helpDesc: 'TaskFlow is a personal task manager that runs entirely in your browser. No account needed — your data saves automatically.',
     helpSteps: ['Type a task in the quick-add bar and press Enter','Use the full form to add priority, due date, and tags','Check the checkbox to complete a task','Use ✎ to edit and × to delete','Switch between List, Calendar, and Stats with the tabs','Enable ↻ Recurrence for repeating tasks'],
     helpFeatList: ['6 languages','Dark mode','Calendar','Statistics','Recurrence','Export / Import','Notifications','Auto-save','Quick Add','Subtasks'],
+    supportMsg: 'If you find TaskFlow useful, consider supporting its development.', supportBtn: 'Support TaskFlow',
   },
   fr: {
     name: 'Français', flag: '🇫🇷',
@@ -88,6 +90,7 @@ const LANGS = {
     helpDesc: 'TaskFlow est un gestionnaire de tâches personnel qui fonctionne entièrement dans votre navigateur. Sans compte — vos données sont sauvegardées automatiquement.',
     helpSteps: ['Tapez une tâche dans la barre rapide et appuyez sur Entrée','Utilisez le formulaire complet pour ajouter priorité, date et étiquettes','Cochez la case pour terminer une tâche','Utilisez ✎ pour modifier et × pour supprimer','Changez de vue avec les onglets Liste, Calendrier, Stats','Activez ↻ Récurrence pour les tâches répétitives'],
     helpFeatList: ['6 langues','Mode sombre','Calendrier','Statistiques','Récurrence','Export / Import','Notifications','Sauvegarde auto','Ajout rapide','Sous-tâches'],
+    supportMsg: 'Si TaskFlow vous est utile, pensez à soutenir son développement.', supportBtn: 'Soutenir TaskFlow',
   },
   de: {
     name: 'Deutsch', flag: '🇩🇪',
@@ -118,6 +121,7 @@ const LANGS = {
     helpDesc: 'TaskFlow ist ein persönlicher Aufgabenmanager, der vollständig im Browser läuft. Kein Konto erforderlich — Ihre Daten werden automatisch gespeichert.',
     helpSteps: ['Aufgabe in die Schnelleingabe tippen und Enter drücken','Vollständiges Formular für Priorität, Datum und Etiketten nutzen','Checkbox ankreuzen, um eine Aufgabe abzuschließen','✎ zum Bearbeiten und × zum Löschen verwenden','Mit den Tabs zwischen Liste, Kalender und Statistik wechseln','↻ Wiederholung für wiederkehrende Aufgaben aktivieren'],
     helpFeatList: ['6 Sprachen','Dunkelmodus','Kalender','Statistiken','Wiederholung','Export / Import','Benachrichtigungen','Auto-Speicherung','Schnelleingabe','Unteraufgaben'],
+    supportMsg: 'Wenn TaskFlow nützlich für Sie ist, erwägen Sie, die Entwicklung zu unterstützen.', supportBtn: 'TaskFlow unterstützen',
   },
   pt: {
     name: 'Português', flag: '🇧🇷',
@@ -148,6 +152,7 @@ const LANGS = {
     helpDesc: 'TaskFlow é um gerenciador de tarefas pessoal que funciona totalmente no navegador. Sem conta — seus dados são salvos automaticamente.',
     helpSteps: ['Digite uma tarefa na barra rápida e pressione Enter','Use o formulário completo para adicionar prioridade, data e etiquetas','Marque a caixa para concluir uma tarefa','Use ✎ para editar e × para excluir','Alterne entre Lista, Calendário e Estatísticas pelas abas','Ative ↻ Recorrência para tarefas que se repetem'],
     helpFeatList: ['6 idiomas','Modo escuro','Calendário','Estatísticas','Recorrência','Export / Import','Notificações','Salvamento auto','Quick Add','Subtarefas'],
+    supportMsg: 'Se o TaskFlow é útil para você, considere apoiar seu desenvolvimento.', supportBtn: 'Apoiar TaskFlow',
   },
   ja: {
     name: '日本語', flag: '🇯🇵',
@@ -178,6 +183,7 @@ const LANGS = {
     helpDesc: 'TaskFlowはブラウザ上で完全に動作する個人タスク管理アプリです。アカウント不要 — データは自動的に保存されます。',
     helpSteps: ['クイック追加バーにタスクを入力してEnterを押す','詳細フォームで優先度・期限・タグを設定する','チェックボックスでタスクを完了する','✎で編集、×で削除する','タブでリスト・カレンダー・統計を切り替える','↻繰り返しで定期タスクを設定する'],
     helpFeatList: ['6言語対応','ダークモード','カレンダー','統計','繰り返し','エクスポート/インポート','通知','自動保存','クイック追加','サブタスク'],
+    supportMsg: 'TaskFlowが役に立てば、開発のサポートをご検討ください。', supportBtn: 'TaskFlowを支援する',
   },
 }
 

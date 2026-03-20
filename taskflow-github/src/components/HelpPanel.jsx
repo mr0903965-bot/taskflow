@@ -1,4 +1,11 @@
 import { useEffect, useRef } from 'react'
+import SupportCard from './SupportCard'
+
+// Donation links — set your own URLs here, or leave empty to hide
+const SUPPORT_LINKS = {
+  bmac: 'https://buymeacoffee.com/YOUR_USERNAME',
+  kofi: 'https://ko-fi.com/YOUR_USERNAME',
+}
 
 // Feature pill icon map — stable, language-independent
 const FEAT_ICONS = ['🌍','🌙','📅','📊','↻','↓↑','🔔','💾','⚡','☑']
@@ -202,6 +209,8 @@ export default function HelpPanel({ t, dark, onClose }) {
           </div>
 
           {/* Footer */}
+          <SupportCard t={t} dark={dark} links={SUPPORT_LINKS} />
+
           <div style={{
             marginTop: 16, textAlign: 'center',
             fontSize: 10, color: muted,
