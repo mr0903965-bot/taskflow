@@ -73,7 +73,7 @@ export default function SupportButton({ dark, variant = 'header' }) {
     }}>
       <span style={{
         fontSize: 10,
-        color: dark ? 'rgba(255,255,255,0.25)' : '#C4C4C4',
+        color: dark ? 'rgba(255,255,255,0.4)' : '#C4C4C4',
         fontFamily: "'Lato', sans-serif",
         lineHeight: 1.5,
       }}>
