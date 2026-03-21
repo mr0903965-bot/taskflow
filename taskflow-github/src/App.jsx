@@ -14,6 +14,7 @@ import StatsView    from './components/StatsView'
 import QuickAdd     from './components/QuickAdd'
 import HelpPanel    from './components/HelpPanel'
 import AppFooter    from './components/AppFooter'
+import SupportButton from './components/SupportButton'
 
 export default function App() {
   // ── Preferences ────────────────────────────────────────────────────────────
@@ -275,6 +276,7 @@ export default function App() {
 
               <button onClick={() => setSound((s) => !s)} style={{ width: 28, height: 28, borderRadius: 7, border: '1px solid rgba(255,255,255,0.1)', background: sound ? 'rgba(52,211,153,0.12)' : 'rgba(255,255,255,0.04)', cursor: 'pointer', fontSize: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{sound ? '🔊' : '🔇'}</button>
               <button onClick={requestNotif} style={{ width: 28, height: 28, borderRadius: 7, border: '1px solid', borderColor: notifPerm === 'granted' ? '#34D399' : 'rgba(255,255,255,0.1)', background: notifPerm === 'granted' ? 'rgba(52,211,153,0.12)' : 'rgba(255,255,255,0.04)', cursor: 'pointer', fontSize: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🔔</button>
+              <SupportButton variant="header" dark={dark} />
               <button onClick={() => setDark((d) => !d)} style={{ width: 28, height: 28, borderRadius: 7, border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.04)', cursor: 'pointer', fontSize: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{dark ? '☀️' : '🌙'}</button>
               <button
                 onClick={() => setShowHelp((s) => !s)}
@@ -416,6 +418,9 @@ export default function App() {
                 <TaskForm t={t} PRIORITIES={PRIORITIES} TAGS={TAGS} dark={dark} onAdd={handleAdd} onCancel={() => setShowForm(false)} />
               )}
             </div>
+
+            {/* ── Support inline card ── */}
+            <SupportButton variant="inline" dark={dark} />
           </>
         )}
       </div>
