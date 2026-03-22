@@ -59,6 +59,16 @@ export default function AppFooter({ dark }) {
           </a>
         </p>
 
+        {/* Built by line */}
+        <p style={{
+          ...text,
+          marginTop: 8,
+          color: dark ? 'rgba(255,255,255,0.15)' : '#D4D4D4',
+          fontSize: 9,
+        }}>
+          Hecho por un desarrollador independiente 🚀
+        </p>
+
       </div>
     </footer>
   )
