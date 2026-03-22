@@ -4,11 +4,12 @@
  * Two variants:
  *   - "header"  → compact pill for the header toolbar
  *   - "inline"  → wider card with supporting text for below the task list
+ * Accepts `t` for i18n.
  */
 
 const BMAC_URL = 'https://buymeacoffee.com/TaskFloww'
 
-export default function SupportButton({ dark, variant = 'header' }) {
+export default function SupportButton({ dark, variant = 'header', t }) {
   const muted  = dark ? 'rgba(255,255,255,0.35)' : '#9CA3AF'
   const bord   = dark ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.08)'
   const textC  = dark ? '#EFEFEF' : '#18181B'
@@ -18,12 +19,15 @@ export default function SupportButton({ dark, variant = 'header' }) {
     window.open(BMAC_URL, '_blank', 'noopener,noreferrer')
   }
 
+  // Button label — falls back gracefully if t not provided
+  const btnLabel = t?.supportBtn || '☕ Apoyar'
+
   // ── Header variant — compact pill ─────────────────────────────────────────
   if (variant === 'header') {
     return (
       <button
         onClick={handleOpen}
-        title="Apoyar TaskFlow en Buy Me a Coffee"
+        title={btnLabel}
         style={{
           height: 28,
           padding: '0 10px',
@@ -52,7 +56,7 @@ export default function SupportButton({ dark, variant = 'header' }) {
           e.currentTarget.style.color = 'rgba(255,255,255,0.65)'
         }}
       >
-        ☕ <span>Apoyar</span>
+        ☕ <span>{btnLabel}</span>
       </button>
     )
   }
@@ -77,7 +81,7 @@ export default function SupportButton({ dark, variant = 'header' }) {
         fontFamily: "'Lato', sans-serif",
         lineHeight: 1.5,
       }}>
-        Si TaskFlow te ayuda a organizarte, puedes apoyarlo con una donación ☕
+        {t?.supportInline || btnLabel}
       </span>
 
       <button
@@ -107,7 +111,7 @@ export default function SupportButton({ dark, variant = 'header' }) {
           e.currentTarget.style.background = 'transparent'
         }}
       >
-        ☕ Apoyar
+        ☕ {btnLabel}
       </button>
     </div>
   )

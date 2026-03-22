@@ -2,8 +2,9 @@
  * AppFooter
  * Minimal informational footer rendered at the bottom of the app.
  * No state, no hooks, no dependencies.
+ * Accepts `t` for i18n — email address is never translated.
  */
-export default function AppFooter({ dark }) {
+export default function AppFooter({ dark, t }) {
   const bord  = dark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)'
   const muted = dark ? 'rgba(255,255,255,0.22)' : '#C0C0C0'
   const link  = dark ? 'rgba(255,255,255,0.30)' : '#A8A8A8'
@@ -20,7 +21,7 @@ export default function AppFooter({ dark }) {
     <footer style={{
       borderTop: `1px solid ${bord}`,
       padding: '20px 26px 24px',
-      marginTop: 'auto',         // pushes footer to bottom when content is short
+      marginTop: 'auto',
     }}>
       <div style={{
         maxWidth: 640,
@@ -31,20 +32,14 @@ export default function AppFooter({ dark }) {
       }}>
 
         {/* App description */}
-        <p style={text}>
-          TaskFlow es una app de gestión de tareas que funciona completamente
-          en el navegador, sin necesidad de cuentas. Los datos se guardan localmente.
-        </p>
+        <p style={text}>{t.footerDesc}</p>
 
         {/* Privacy note */}
-        <p style={text}>
-          TaskFlow no recopila datos personales. Toda la información se almacena
-          localmente en tu navegador.
-        </p>
+        <p style={text}>{t.footerPrivacy}</p>
 
-        {/* Contact */}
+        {/* Contact — email is intentionally NOT translated */}
         <p style={{ ...text, marginTop: 2 }}>
-          Contacto:{' '}
+          {t.footerContact}:{' '}
           <a
             href="mailto:support.taskflow@gmail.com?subject=Soporte%20TaskFlow"
             style={{
@@ -59,14 +54,14 @@ export default function AppFooter({ dark }) {
           </a>
         </p>
 
-        {/* Built by line */}
+        {/* Built by */}
         <p style={{
           ...text,
           marginTop: 8,
           color: dark ? 'rgba(255,255,255,0.15)' : '#D4D4D4',
           fontSize: 9,
         }}>
-          Hecho por un desarrollador independiente 🚀
+          {t.footerBuiltBy}
         </p>
 
       </div>
